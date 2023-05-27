@@ -7,6 +7,11 @@ use App\Models\Author;
 
 class AuthorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // display all authors
     public function list()
     {
