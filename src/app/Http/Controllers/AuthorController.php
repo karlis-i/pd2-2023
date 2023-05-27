@@ -41,12 +41,12 @@ class AuthorController extends Controller
     // save new author
     public function put(Request $request)
     {
-        $validatedDate = $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
         ]);
 
         $author = new Author();
-        $author->name = $validatedDate['name'];
+        $author->name = $validatedData['name'];
         $author->save();
 
         return redirect('/authors');
@@ -67,11 +67,11 @@ class AuthorController extends Controller
     // update existing authors
     public function patch(Author $author, Request $request)
     {
-        $validatedDate = $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
         ]);
 
-        $author->name = $validatedDate['name'];
+        $author->name = $validatedData['name'];
         $author->save();
 
         return redirect('/authors');
