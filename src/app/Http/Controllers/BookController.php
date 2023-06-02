@@ -66,4 +66,51 @@ class BookController extends Controller
 
         return redirect('/books');
     }
+
+    // display book update form
+    public function update(Book $book)
+    {
+        $authors = Author::orderBy('name', 'asc')->get();
+
+        return view(
+            'book.form',
+            [
+                'title' => 'Rediģēt grāmatu',
+                'book' => $book,
+                'authors' => $authors,
+            ]
+        );
+    }
+
+    // update existing book
+    public function patch(Book $book, Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|min:3|max:256',
+            'author_id' => 'required',
+            'description' => 'nullable',
+            'price' => 'nullable|numeric',
+            'year' => 'numeric',
+            'image' => 'nullable|image',
+            'display' => 'nullable'
+        ]);
+
+        $book->name = $validatedData['name'];
+        $book->author_id = $validatedData['author_id'];
+        $book->description = $validatedData['description'];
+        $book->price = $validatedData['price'];
+        $book->year = $validatedData['year'];
+        $book->display = (bool) ($validatedData['display'] ?? false);
+        $book->save();
+
+        return redirect('/books/update/' . $book->id);
+    }
+
+    // delete books
+    public function delete(Book $book)
+    {
+        $book->delete();
+        return redirect('/books');
+    }
+
 }

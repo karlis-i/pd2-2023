@@ -43,4 +43,6 @@
 
     </form>
 
+    <p class="font-monospace">guest / guest</p>
+
 @endsection
