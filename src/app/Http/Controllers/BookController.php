@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Author;
+use App\Models\Genre;
 use App\Http\Requests\BookRequest;
 
 class BookController extends Controller
@@ -51,6 +52,7 @@ class BookController extends Controller
     public function create()
     {
         $authors = Author::orderBy('name', 'asc')->get();
+        $genres = Genre::orderBy('name', 'asc')->get();
 
         return view(
             'book.form',
@@ -58,6 +60,7 @@ class BookController extends Controller
                 'title' => 'Pievienot jaunu grāmatu',
                 'book' => new Book(),
                 'authors' => $authors,
+                'genres' => $genres,
             ]
         );
     }
@@ -76,6 +79,7 @@ class BookController extends Controller
     public function update(Book $book)
     {
         $authors = Author::orderBy('name', 'asc')->get();
+        $genres = Genre::orderBy('name', 'asc')->get();
 
         return view(
             'book.form',
@@ -83,6 +87,7 @@ class BookController extends Controller
                 'title' => 'Rediģēt grāmatu',
                 'book' => $book,
                 'authors' => $authors,
+                'genres' => $genres,
             ]
         );
     }

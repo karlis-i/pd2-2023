@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,15 @@ Route::post('/books/put', [BookController::class, 'put']);
 Route::get('/books/update/{book}', [BookController::class, 'update']);
 Route::post('/books/patch/{book}', [BookController::class, 'patch']);
 Route::post('/books/delete/{book}', [BookController::class, 'delete']);
+
+
+// Genre routes
+Route::get('/genres', [GenreController::class, 'list']);
+Route::get('/genres/create', [GenreController::class, 'create']);
+Route::post('/genres/put', [GenreController::class, 'put']);
+Route::get('/genres/update/{genre}', [GenreController::class, 'update']);
+Route::post('/genres/patch/{genre}', [GenreController::class, 'patch']);
+Route::post('/genres/delete/{genre}', [GenreController::class, 'delete']);
 
 
 // Auth routes
